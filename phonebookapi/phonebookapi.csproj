@@ -5,4 +5,10 @@
   </PropertyGroup>
 
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.10.3" />
+  </ItemGroup>
 </Project>
