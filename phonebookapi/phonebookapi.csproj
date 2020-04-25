@@ -7,14 +7,17 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'PhonebookApi' ">
     <StartAction>Project</StartAction>
-    <LaunchUrl>api/phonebook</LaunchUrl>
+    <ExternalConsole>true</ExternalConsole>
     <ApplicationURL>https://localhost:5001;http://localhost:5000</ApplicationURL>
+    <LaunchUrl>api/phonebook</LaunchUrl>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver.Core" Version="2.10.3" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
   </ItemGroup>
 </Project>

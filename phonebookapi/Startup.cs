@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using PhonebookApi.Models;
+using PhonebookApi.Repository;
 
 namespace PhonebookApi
 {
@@ -41,6 +42,8 @@ namespace PhonebookApi
                                   });
             });
 
+            services.AddTransient<IMongoPhoneBookDBContext, MongoPhoneBookDBContext>();
+            services.AddTransient<IPhoneBookRepository, PhoneBookRepository>();
 
             services.AddControllers();
         }
@@ -68,3 +71,4 @@ namespace PhonebookApi
         }
     }
 }
+ 
