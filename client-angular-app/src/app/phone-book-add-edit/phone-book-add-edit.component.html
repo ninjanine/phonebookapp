@@ -1,1 +1,48 @@
-<p>phone-book-add-edit works!</p>
+
+<div class="container table">
+  <a [routerLink]="['/']" class="btn btn-primary float-right mt-3">Home</a>
+</div>
+
+<h1>{{actionType}} a new contact</h1>
+
+<form  [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+  <div class="card-body" class="form-group row">
+    <label class=" control-label col-md-12">Contact name</label>
+    <div class="col-md-12">
+      <input class="form-control" type="text" formControlName="name">
+    </div>
+    <span class="text-danger ml-3" *ngIf="name.invalid && formDir.submitted">
+      Name is required.
+    </span>
+  </div>
+
+
+  <div class="card-group">
+    <div class="card-body" formArrayName="entries" *ngFor="let item of phoneBookEntries.controls; let i = index;">
+      <div [formGroupName]="i">
+        <h5>Entry {{i + 1}}</h5>
+        <div class="form-group row">
+          <label class=" control-label col-md-12">Name</label>
+          <div class="col-md-12">
+            <input  class="form-control" formControlName="name" placeholder="Entry name">
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class=" control-label col-md-12">Phone number</label>
+          <div class="col-md-12">
+            <input  class="form-control" formControlName="phoneNumber" placeholder="Entry phone number">
+          </div>
+        </div>
+        <button class="btn btn-primary m-2" type="button" (click)="removeEntry(i)"> Delete Entry </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+      <button class="btn btn-primary m-1" type="button" (click)="addEntry()"> Add Entry </button>
+      <button class="btn btn-primary m-1" type="submit" class="btn btn-success" > Save </button>
+      <button class="btn btn-secondary m-1" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>

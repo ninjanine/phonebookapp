@@ -1,1 +1,29 @@
-<p>phone-book-list works!</p>
+<h1>ABSA Phone Book</h1>
+
+<p *ngIf="!(phoneBooks$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Contact</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(phoneBooks$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let phoneBook of (phoneBooks$ | async)">
+      <td><a [routerLink]="['/phoneBook/', phoneBook.id]">{{ phoneBook.name }}</a>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let entry of phoneBook.entries">
+            {{ entry.name }} - {{entry.phoneNumber}}
+          </li>
+        </ul>
+      </td>
+      <td><a [routerLink]="['/edit/', phoneBook.id]" class="btn btn-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="delete(phoneBook)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
