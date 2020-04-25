@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phonebookapi", "phonebookapi.csproj", "{522A1364-C1F2-482C-AC91-DD5A9304DC5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phonebookapi.tests", "phonebookapi.tests\phonebookapi.tests.csproj", "{00BDFE7B-FC17-4018-9828-5C672FB69687}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{522A1364-C1F2-482C-AC91-DD5A9304DC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522A1364-C1F2-482C-AC91-DD5A9304DC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522A1364-C1F2-482C-AC91-DD5A9304DC5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00BDFE7B-FC17-4018-9828-5C672FB69687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00BDFE7B-FC17-4018-9828-5C672FB69687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00BDFE7B-FC17-4018-9828-5C672FB69687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00BDFE7B-FC17-4018-9828-5C672FB69687}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

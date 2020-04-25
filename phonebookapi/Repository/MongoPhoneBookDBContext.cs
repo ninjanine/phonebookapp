@@ -21,6 +21,9 @@ namespace PhonebookApi.Repository
 
         public IMongoCollection<T> GetCollection<T>()
         {
+            if (String.IsNullOrEmpty(table)) {
+                return null;
+            }
             return _db.GetCollection<T>(table);
         }
     }

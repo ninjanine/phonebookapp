@@ -24,28 +24,45 @@ namespace PhonebookApi.Controllers
         public async Task<ActionResult<IEnumerable<PhoneBook>>> Get()
         {
             var products = await _productRepository.Get();
+            if (products == null)
+            {
+                return NotFound();
+
+            }
             return Ok(products);
         }
 
         [HttpGet("{id}", Name = "PhoneBookRoute")]
         public async Task<ActionResult<PhoneBook>> Get(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
             var product = await _productRepository.Get(id);
             return Ok(product);
         }
 
 
         [HttpPost]
-        public ActionResult<PhoneBook> Create(PhoneBook phoneBookIn)
+        public ActionResult<PhoneBook> Create(PhoneBook phoneBook)
         {
-            _productRepository.Create(phoneBookIn);
+            if (phoneBook == null)
+            {
+                return BadRequest();
+            }
+            _productRepository.Create(phoneBook);
 
-            return CreatedAtRoute("PhoneBookRoute", new { id = phoneBookIn.Id.ToString() }, phoneBookIn);
+            return CreatedAtRoute("PhoneBookRoute", new { id = phoneBook.Id.ToString() }, phoneBook);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, PhoneBook phoneBookIn)
+        public ActionResult Update(Guid id, PhoneBook phoneBookIn)
         {
+            if (id == Guid.Empty) {
+                return NotFound();
+            }
+
             var phoneBook = _productRepository.Get(id);
 
             if (phoneBook == null)
@@ -61,6 +78,11 @@ namespace PhonebookApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
+
             var phoneBook = _productRepository.Get(id);
 
             if (phoneBook == null)

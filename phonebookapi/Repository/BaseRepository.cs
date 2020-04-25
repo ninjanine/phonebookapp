@@ -18,6 +18,12 @@ namespace PhonebookApi.Repository
             _dbCollection = _mongoContext.GetCollection<TEntity>();
         }
 
+        public async Task<IEnumerable<TEntity>> Get()
+        {
+            var all = await _dbCollection.FindAsync(Builders<TEntity>.Filter.Empty);
+            return await all.ToListAsync();
+        }
+
         public void Create(TEntity obj)
         {
             if (obj == null)
@@ -47,10 +53,6 @@ namespace PhonebookApi.Repository
             return await _dbCollection.FindAsync(filter).Result.FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> Get()
-        {
-            var all = await _dbCollection.FindAsync(Builders<TEntity>.Filter.Empty);
-            return await all.ToListAsync();
-        }
+
     }
 }
