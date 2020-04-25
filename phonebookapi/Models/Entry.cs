@@ -1,4 +1,4 @@
-﻿namespace phonebookapi.Models
+﻿namespace PhonebookApi.Models
 {
     public class Entry
     {

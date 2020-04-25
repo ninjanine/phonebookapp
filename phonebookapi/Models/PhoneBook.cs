@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace phonebookapi.Models
+namespace PhonebookApi.Models
 {
     public class PhoneBook
     {
