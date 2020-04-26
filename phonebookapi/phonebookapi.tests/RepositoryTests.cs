@@ -21,11 +21,6 @@ namespace phonebookapi.tests
             _mockOptions = new Mock<IOptions<MongoDBSettings>>();
             _mockDB = new Mock<IMongoDatabase>();
             _mockClient = new Mock<IMongoClient>();
-        }
-
-        [Fact]
-        public void MongDBContext_ShouldInitContructor_Successfully()
-        {
             var settings = new MongoDBSettings()
             {
                 ConnectionString = "mongodb://tes123 ",
@@ -33,6 +28,12 @@ namespace phonebookapi.tests
             };
 
             _mockOptions.Setup(s => s.Value).Returns(settings);
+        }
+
+        [Fact]
+        public void MongDBContext_ShouldInitContructor_Successfully()
+        {
+            //Arrange
             _mockClient.Setup(c => c
             .GetDatabase(_mockOptions.Object.Value.DatabaseName, null))
                 .Returns(_mockDB.Object);
@@ -49,14 +50,6 @@ namespace phonebookapi.tests
         {
 
             //Arrange
-            var settings = new MongoDBSettings()
-            {
-                ConnectionString = "mongodb://tes123",
-                DatabaseName = "TestDB",
-                PhoneBooksCollectionName = ""
-            };
-
-            _mockOptions.Setup(s => s.Value).Returns(settings);
             _mockClient.Setup(c => c
             .GetDatabase(_mockOptions.Object.Value.DatabaseName, null))
                 .Returns(_mockDB.Object);

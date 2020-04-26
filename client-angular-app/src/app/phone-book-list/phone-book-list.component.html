@@ -1,7 +1,7 @@
 
 <div class="container col-md-12 m-3">
   <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Contact</a>
-  <button class="btn btn-primary float-right btn btn-primary mr-2" type="button" (click)="loadAllPhoneBooks();box.value = ''" *ngIf="(phoneBooks$ | async)?.length == 0 && hasSearched"> All results </button>
+  <button class="btn btn-primary float-right btn btn-primary mr-2" type="button" (click)="loadAllPhoneBooks();box.value = ''" *ngIf="hasSearched"> All results </button>
   <button class="btn btn-primary float-right btn btn-primary mr-2" type="button" (click)="search(box.value)"> Search </button>
   <input #box class="form-control mr-sm-2 float-right mb-3 col-md-3" type="text" placeholder="Search"/>
 </div>

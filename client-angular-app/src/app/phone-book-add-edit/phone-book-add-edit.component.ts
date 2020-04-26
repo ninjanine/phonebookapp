@@ -16,7 +16,6 @@ export class PhoneBookAddEditComponent implements OnInit {
   actionType: string;
 
   formName: string;
-  formBody: string;
   id: string;
   errorMessage: any;
   existingPhoneBook: PhoneBook;
@@ -28,7 +27,6 @@ export class PhoneBookAddEditComponent implements OnInit {
       const idParam = 'id';
       this.actionType = 'Add';
       this.formName = 'name';
-      this.formBody = 'body';
       this.id = '';
       if (this.avRoute.snapshot.params[idParam]) {
         this.id = this.avRoute.snapshot.params[idParam];
@@ -79,8 +77,6 @@ export class PhoneBookAddEditComponent implements OnInit {
           id: this.existingPhoneBook.id,
           name: this.form.get(this.formName).value,
           entries: this.entries.value
-
-          // entries need to be updated
         };
 
         this.phoneBookService.updatePhoneBook(phoneBook.id, phoneBook)
@@ -130,7 +126,6 @@ export class PhoneBookAddEditComponent implements OnInit {
       return formGroup;
     }
 
-      // triggered to change validation of value field type
     changedFieldType(index) {
       let validators = null;
       validators = Validators.compose([
