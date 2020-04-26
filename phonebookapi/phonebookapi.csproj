@@ -32,4 +32,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.3.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.3.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="phonebookapi.tests\bin\Release\netcoreapp3.1\phonebookapi.tests.runtimeconfig.dev.json" />
+    <Content Remove="phonebookapi.tests\bin\Release\netcoreapp3.1\phonebookapi.tests\obj\phonebookapi.tests.csproj.nuget.dgspec.json" />
+    <Content Remove="phonebookapi.tests\bin\Release\netcoreapp3.1\phonebookapi.tests.runtimeconfig.json" />
+  </ItemGroup>
 </Project>

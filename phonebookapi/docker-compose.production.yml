@@ -21,3 +21,11 @@ services:
         ME_CONFIG_MONGODB_ADMINPASSWORD: cyberpisc00l
       depends_on:
         - mongo
+
+  phonebook:
+      image: ninjanine/phonebookapi
+      restart: always
+      ports:
+        - 5001:80
+      depends_on:
+        - mongo

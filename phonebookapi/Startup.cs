@@ -69,8 +69,6 @@ namespace PhonebookApi
 
             app.UseCors(Origins);
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
