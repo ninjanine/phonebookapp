@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using PhonebookApi.Models;
 using PhonebookApi.Repository;
 
@@ -45,6 +46,10 @@ namespace PhonebookApi
             services.AddTransient<IMongoPhoneBookDBContext, MongoPhoneBookDBContext>();
             services.AddTransient<IPhoneBookRepository, PhoneBookRepository>();
 
+            services.AddSwaggerGen(swag => {
+                swag.SwaggerDoc("v1", new OpenApiInfo { Title = "Phone Book API", Version = "v1" });
+            });
+
             services.AddControllers();
         }
 
@@ -55,6 +60,12 @@ namespace PhonebookApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(swag =>{
+                swag.SwaggerEndpoint("/swagger/v1/swagger.json", "Phone Book API v1");
+            });
 
             app.UseCors(Origins);
 
