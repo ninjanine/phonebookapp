@@ -37,7 +37,16 @@ export class PhoneBookService {
       retry(1),
       catchError(this.errorHandler)
     );
-}
+  }
+
+  getSearchResult(name : string): Observable<PhoneBook[]> {
+    return this.http.get<PhoneBook[]>(this.myAppUrl + this.myApiUrl + "search?name=" + name)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
 
 savePhoneBook(PhoneBook): Observable<PhoneBook> {
     return this.http.post<PhoneBook>(this.myAppUrl + this.myApiUrl, JSON.stringify(PhoneBook), this.httpOptions)

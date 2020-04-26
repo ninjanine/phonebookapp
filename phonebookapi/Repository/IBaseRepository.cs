@@ -11,5 +11,6 @@ namespace PhonebookApi.Repository
         void Delete(Guid id);
         Task<TEntity> Get(Guid id);
         Task<IEnumerable<TEntity>> Get();
+        Task<IEnumerable<TEntity>> Search(string name);
     }
 }

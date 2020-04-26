@@ -229,6 +229,27 @@ namespace phonebookapi.tests
             mockRepo.Verify(repo => repo.Delete(id), Times.Once);
             Assert.IsType<OkResult>(result);
         }
-        
+
+
+        [Fact]
+        public async Task Search_ReturnsHttpOk_WhenContentIsFound()
+        {
+            // Arrange
+            string searchquery = "contact one";
+            var phoneBooks = new List<PhoneBook>();
+            var mockRepo = new Mock<IPhoneBookRepository>();
+            mockRepo.Setup(repo => repo.Search(searchquery))
+                .ReturnsAsync(phoneBooks);
+
+            var controller = new PhoneBookController(mockRepo.Object);
+
+            // Act
+            var result = await controller.Search(searchquery);
+
+            // Assert
+            mockRepo.Verify(repo => repo.Search(searchquery), Times.Once);
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
     }
 }

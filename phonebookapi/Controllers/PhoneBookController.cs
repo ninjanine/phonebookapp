@@ -95,6 +95,18 @@ namespace PhonebookApi.Controllers
             return Ok();
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<List<PhoneBook>>> Search(string name) {
+            if (String.IsNullOrEmpty(name))
+            {
+                return NoContent();
+            }
+
+            var searchResult = await _productRepository.Search(name);
+
+            return Ok(searchResult);
+        }
+
     }
 
 }

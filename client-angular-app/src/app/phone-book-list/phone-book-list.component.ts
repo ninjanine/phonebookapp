@@ -11,7 +11,7 @@ import { PhoneBookService } from '../phone-book.service';
 })
 export class PhoneBooksComponent implements OnInit {
   phoneBooks$: Observable<PhoneBook[]>;
-
+  hasSearched : boolean = false;
   constructor(private phoneBookService: PhoneBookService) { }
 
   ngOnInit(): void {
@@ -20,6 +20,13 @@ export class PhoneBooksComponent implements OnInit {
 
   loadAllPhoneBooks() {
     this.phoneBooks$ = this.phoneBookService.getPhoneBooks();
+  }
+
+  search(searchInput :string) {
+    if (searchInput){
+      this.phoneBooks$ = this.phoneBookService.getSearchResult(searchInput);
+      this.hasSearched = true;
+    }
   }
 
   delete(phoneBook) {

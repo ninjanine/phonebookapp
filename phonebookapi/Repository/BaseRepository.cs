@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using PhonebookApi.Models;
 
 namespace PhonebookApi.Repository
 {
@@ -24,6 +26,30 @@ namespace PhonebookApi.Repository
             return await all.ToListAsync();
         }
 
+        public async Task<TEntity> Get(Guid id)
+        {
+            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq("_id", id);
+
+            _dbCollection = _mongoContext.GetCollection<TEntity>();
+
+            return await _dbCollection.FindAsync(filter).Result.FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<TEntity>> Search(string name)
+        {
+            _dbCollection = _mongoContext.GetCollection<TEntity>();
+            var nameFieldDefinition = new ExpressionFieldDefinition<PhoneBook, string>(x => x.Name);
+
+            List<FilterDefinition<TEntity>> filters = new List<FilterDefinition<TEntity>>
+            {
+                Builders<TEntity>.Filter.Eq("Name", name),
+            };
+
+            var filterCombination = Builders<TEntity>.Filter.Or(filters);
+
+            return await _dbCollection.FindAsync(filterCombination).Result.ToListAsync();
+        }
+
         public void Create(TEntity obj)
         {
             if (obj == null)
@@ -42,15 +68,6 @@ namespace PhonebookApi.Repository
         public void Update(Guid id, TEntity entity)
         {
             _dbCollection.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", id), entity);
-        }
-
-        public async Task<TEntity> Get(Guid id)
-        {
-            FilterDefinition<TEntity> filter = Builders<TEntity>.Filter.Eq("_id", id);
-
-            _dbCollection = _mongoContext.GetCollection<TEntity>();
-
-            return await _dbCollection.FindAsync(filter).Result.FirstOrDefaultAsync();
         }
 
 

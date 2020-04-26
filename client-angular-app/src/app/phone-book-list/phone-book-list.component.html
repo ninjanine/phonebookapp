@@ -1,11 +1,14 @@
-<h1>ABSA Phone Book</h1>
 
-<p *ngIf="!(phoneBooks$ | async)"><em>Loading...</em></p>
-<p>
+<div class="container col-md-12 m-3">
   <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Contact</a>
-</p>
+  <button class="btn btn-primary float-right btn btn-primary mr-2" type="button" (click)="loadAllPhoneBooks();box.value = ''" *ngIf="(phoneBooks$ | async)?.length == 0 && hasSearched"> All results </button>
+  <button class="btn btn-primary float-right btn btn-primary mr-2" type="button" (click)="search(box.value)"> Search </button>
+  <input #box class="form-control mr-sm-2 float-right mb-3 col-md-3" type="text" placeholder="Search"/>
+</div>
+<h1>Phone Book</h1>
+<p *ngIf="!(phoneBooks$ | async)"><em>Loading...</em></p>
 
-<table class="table table-sm table-hover" *ngIf="(phoneBooks$ | async)?.length>0">
+<table class="table table-sm table-hover" >
   <thead>
     <tr>
       <th>Title</th>
@@ -13,7 +16,11 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tr *ngIf="(phoneBooks$ | async)?.length == 0 && hasSearched">
+    <td colspan="3">No results</td>
+  </tr>
+  <tbody *ngIf="(phoneBooks$ | async)?.length>0">
+
     <tr *ngFor="let phoneBook of (phoneBooks$ | async)">
       <td><a [routerLink]="['/phoneBook/', phoneBook.id]">{{ phoneBook.name }}</a>
         <ul class="list-group list-group-flush">
